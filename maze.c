@@ -1,4 +1,4 @@
-#include <SDL.h> 
+#include <SDL.h>
 #include <stdio.h>
 
 #include "maze.h"
@@ -35,13 +35,13 @@ internal void HandleEvent(SDL_Event *event)
 
         case SDL_MOUSEBUTTONDOWN:
         {
-        } break; 
+        } break;
 
-        case SDL_MOUSEBUTTONUP: 
+        case SDL_MOUSEBUTTONUP:
         {
         } break;
 
-        case SDL_MOUSEMOTION: 
+        case SDL_MOUSEMOTION:
         {
         } break;
     }
@@ -54,9 +54,9 @@ int main(int argc, char** argv)
         printf("SDL_Init failed: %s", SDL_GetError());
     }
 
-    SDL_Window *window = SDL_CreateWindow("Maze", 
-                                          SDL_WINDOWPOS_UNDEFINED, 
-                                          SDL_WINDOWPOS_UNDEFINED, 
+    SDL_Window *window = SDL_CreateWindow("Maze",
+                                          SDL_WINDOWPOS_UNDEFINED,
+                                          SDL_WINDOWPOS_UNDEFINED,
                                           1281, 721, 0);
 
     if (window)
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
             Global_Running = 1;
             while (Global_Running)
             {
-                SDL_Event event; 
+                SDL_Event event;
                 while (SDL_PollEvent(&event))
                 {
                     HandleEvent(&event);
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
                 UpdateApp(renderer, &Global_State);
             }
         }
-        else 
+        else
         {
             printf("SDL_CreateRenderer failed: %s", SDL_GetError());
         }
@@ -88,5 +88,5 @@ int main(int argc, char** argv)
     }
 
     SDL_Quit();
-    return 0; 
+    return 0;
 }

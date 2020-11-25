@@ -12,6 +12,10 @@ internal void RenderGrid(SDL_Renderer *renderer)
     }
 }
 
+internal void RenderMaze(SDL_Renderer *renderer)
+{
+}
+
 internal void UpdateApp(SDL_Renderer *renderer, app_state *state)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
