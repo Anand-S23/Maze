@@ -13,7 +13,7 @@ set SDL2_LIBINC=%SDL2_LIB%\include
 if not exist build mkdir build 
 pushd build 
 
-robocopy %SDL2_LIBDIR% . *.dll
+:: robocopy %SDL2_LIBDIR% . *.dll
 
-cl -Zi -FC -MD ..\maze.c -I%SDL2_LIBINC% -I%PRIM% %SDL2_LIBDIR%\SDL2.lib %SDL2_LIBDIR%\SDL2main.lib Shell32.lib -link /machine:%TARGET% -subsystem:CONSOLE
+cl -Zi -FC -MD /nologo ..\maze.c -I%SDL2_LIBINC% -I%PRIM% %SDL2_LIBDIR%\SDL2.lib %SDL2_LIBDIR%\SDL2main.lib Shell32.lib -link /machine:%TARGET% -subsystem:WINDOWS
 popd

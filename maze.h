@@ -24,8 +24,8 @@ typedef i32 b32;
 
 #define MAP_WIDTH    720
 #define MAP_HEIGHT   720
-#define CELL_WIDTH   40
-#define CELL_HEIGHT  40
+#define CELL_WIDTH   20
+#define CELL_HEIGHT  20
 
 #define BOARD_SIZE   (MAP_WIDTH / CELL_WIDTH) * (MAP_HEIGHT / CELL_HEIGHT)
 #define BOARD_WIDTH  (MAP_WIDTH / CELL_WIDTH)
