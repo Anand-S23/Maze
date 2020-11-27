@@ -22,11 +22,14 @@ typedef i32 b32;
 #define global static
 #define local_persist static
 
-#define MAP_WIDTH 1280
-#define MAP_HEIGHT 720
-#define CELL_HEIGHT 40
-#define CELL_WIDTH 40
-#define BOARD_SIZE (MAP_WIDTH / CELL_WIDTH) * (MAP_HEIGHT / CELL_HEIGHT)
+#define MAP_WIDTH    720
+#define MAP_HEIGHT   720
+#define CELL_WIDTH   40
+#define CELL_HEIGHT  40
+
+#define BOARD_SIZE   (MAP_WIDTH / CELL_WIDTH) * (MAP_HEIGHT / CELL_HEIGHT)
+#define BOARD_WIDTH  (MAP_WIDTH / CELL_WIDTH)
+#define BOARD_HEIGHT (MAP_HEIGHT / CELL_HEIGHT) 
 
 typedef enum mode
 {
@@ -46,27 +49,32 @@ enum
 typedef struct input 
 {
     // mouse pos
-    f32 mouse_x; 
-    f32 mouse_y; 
+    int mouse_x; 
+    int mouse_y; 
 
     // button state
     b32 mouse_left_down; 
     b32 mouse_right_down; 
     b32 space_down; 
     b32 esc_down; 
-}
+} input;
 
 typedef struct cell
 {
     b32 visited;
     b32 walls[WALL_max];
+    input input;
 } cell;
 
 typedef struct app_state
 {
+    cell board[BOARD_SIZE];
+    linked_list stack;
+    b32 board_initialized;
+    b32 generating;
+    int current_cell; 
     mode current_mode;
     input input;
-    cell board[BOARD_SIZE];
 } app_state;
 
 #endif

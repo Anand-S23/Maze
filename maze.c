@@ -1,6 +1,8 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <time.h>
 
+#include "stack.c"
 #include "maze.h"
 #include "app.c"
 
@@ -17,6 +19,7 @@ internal void HandleEvent(SDL_Event *event)
         } break;
 
         case SDL_KEYUP:
+        case SDL_KEYDOWN:
         {
             if (event->key.repeat == 0)
             {
@@ -24,10 +27,14 @@ internal void HandleEvent(SDL_Event *event)
                 {
                     case SDL_SCANCODE_SPACE:
                     {
+                        Global_State.input.space_down = 
+                            (Global_State.input.space_down == 1) ? 0 : 1; 
                     } break;
 
                     case SDL_SCANCODE_ESCAPE:
                     {
+                        Global_State.input.esc_down = 
+                            (Global_State.input.esc_down == 1) ? 0 : 1; 
                     } break;
                 }
            }
@@ -35,14 +42,24 @@ internal void HandleEvent(SDL_Event *event)
 
         case SDL_MOUSEBUTTONDOWN:
         {
+            Global_State.input.mouse_left_down = 
+                (event->button.button == SDL_BUTTON_LEFT) ? 1 : 0; 
+            Global_State.input.mouse_right_down = 
+                (event->button.button == SDL_BUTTON_RIGHT) ? 1 : 0; 
         } break;
 
         case SDL_MOUSEBUTTONUP:
         {
+            Global_State.input.mouse_left_down = 
+                (event->button.button == SDL_BUTTON_LEFT) ? 0 : 1; 
+            Global_State.input.mouse_right_down = 
+                (event->button.button == SDL_BUTTON_RIGHT) ? 0 : 1; 
         } break;
 
         case SDL_MOUSEMOTION:
         {
+            SDL_GetMouseState(&Global_State.input.mouse_x, 
+                              &Global_State.input.mouse_y);
         } break;
     }
 }
@@ -57,14 +74,16 @@ int main(int argc, char** argv)
     SDL_Window *window = SDL_CreateWindow("Maze",
                                           SDL_WINDOWPOS_UNDEFINED,
                                           SDL_WINDOWPOS_UNDEFINED,
-                                          1281, 721, 0);
+                                          721, 721, 0);
 
     if (window)
     {
-        SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+        SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 
+                                                    SDL_RENDERER_ACCELERATED);
 
         if (renderer)
         {
+            srand(time(NULL));
             Global_Running = 1;
             while (Global_Running)
             {
